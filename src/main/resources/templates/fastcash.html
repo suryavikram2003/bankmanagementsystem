@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Cash - Bank Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}" style="float: right;">Logout</a>
+        </div>
+
+        <h1>Fast Cash Withdrawal</h1>
+
+        <div th:if="${error}" class="alert alert-error">
+            <p th:text="${error}"></p>
+        </div>
+
+        <h3>Select Withdrawal Amount</h3>
+        <form th:action="@{/fastcash}" method="post">
+            <div class="grid">
+                <div class="grid-item">
+                    <button type="submit" name="amount" value="100" class="btn btn-primary" style="width: 100%;">₹100</button>
+                </div>
+                <div class="grid-item">
+                    <button type="submit" name="amount" value="500" class="btn btn-primary" style="width: 100%;">₹500</button>
+                </div>
+                <div class="grid-item">
+                    <button type="submit" name="amount" value="1000" class="btn btn-primary" style="width: 100%;">₹1,000</button>
+                </div>
+                <div class="grid-item">
+                    <button type="submit" name="amount" value="2000" class="btn btn-primary" style="width: 100%;">₹2,000</button>
+                </div>
+                <div class="grid-item">
+                    <button type="submit" name="amount" value="5000" class="btn btn-primary" style="width: 100%;">₹5,000</button>
+                </div>
+                <div class="grid-item">
+                    <button type="submit" name="amount" value="10000" class="btn btn-primary" style="width: 100%;">₹10,000</button>
+                </div>
+            </div>
+
+            <div class="text-center mt-20">
+                <a th:href="@{/dashboard}" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

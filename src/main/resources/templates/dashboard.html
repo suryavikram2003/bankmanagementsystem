@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Bank Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}" style="float: right;">Logout</a>
+        </div>
+
+        <h1>Welcome to Your Dashboard</h1>
+        <h3 th:if="${account}" th:text="'Account: ' + ${account.accountNumber}"></h3>
+
+        <div th:if="${success}" class="alert alert-success">
+            <p th:text="${success}"></p>
+        </div>
+
+        <div th:if="${error}" class="alert alert-error">
+            <p th:text="${error}"></p>
+        </div>
+
+        <div class="balance-display" th:if="${balance != null}">
+            Current Balance: ₹<span th:text="${#numbers.formatDecimal(balance, 1, 2)}"></span>
+        </div>
+
+        <h2>Select Your Transaction</h2>
+        <div class="grid">
+            <div class="grid-item">
+                <a th:href="@{/deposit}" class="btn btn-primary" style="width: 100%;">Deposit</a>
+            </div>
+            <div class="grid-item">
+                <a th:href="@{/withdraw}" class="btn btn-primary" style="width: 100%;">Cash Withdrawal</a>
+            </div>
+            <div class="grid-item">
+                <a th:href="@{/fastcash}" class="btn btn-primary" style="width: 100%;">Fast Cash</a>
+            </div>
+            <div class="grid-item">
+                <a th:href="@{/mini}" class="btn btn-primary" style="width: 100%;">Mini Statement</a>
+            </div>
+            <div class="grid-item">
+                <a th:href="@{/pin}" class="btn btn-primary" style="width: 100%;">PIN Change</a>
+            </div>
+            <div class="grid-item">
+                <a th:href="@{/balance}" class="btn btn-primary" style="width: 100%;">Balance Enquiry</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -21,7 +21,4 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     List<Account> findByFormNo(String formNo);
     
     boolean existsByAccountNumber(String accountNumber);
-    
-    @Query("SELECT a FROM Account a WHERE a.accountNumber = ?1 AND a.pin = ?2")
-    Optional<Account> validateAccount(String accountNumber, String pin);
 }

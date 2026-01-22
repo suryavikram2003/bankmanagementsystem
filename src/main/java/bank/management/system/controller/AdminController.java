@@ -34,8 +34,12 @@ public class AdminController {
                             @RequestParam String password,
                             HttpSession session,
                             Model model) {
-        // Simple hardcoded admin authentication (can be enhanced with database)
-        if ("admin".equals(adminId) && "admin123".equals(password)) {
+        // Admin authentication - credentials should be externalized to environment variables
+        // For demo purposes, using simple comparison (in production, use database with hashed passwords)
+        String expectedAdminId = System.getenv().getOrDefault("ADMIN_ID", "admin");
+        String expectedPassword = System.getenv().getOrDefault("ADMIN_PASSWORD", "admin123");
+        
+        if (expectedAdminId.equals(adminId) && expectedPassword.equals(password)) {
             session.setAttribute("adminLoggedIn", true);
             return "redirect:/admin/dashboard";
         } else {

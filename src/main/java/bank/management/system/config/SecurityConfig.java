@@ -24,19 +24,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                // Public pages
-                .requestMatchers("/", "/login", "/signup", "/css/**", "/js/**", "/images/**").permitAll()
-                // Admin pages require ADMIN role
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                // User pages require USER role
-                .requestMatchers("/dashboard", "/deposit", "/withdraw", "/balance", "/fastcash", "/pin", "/mini").hasRole("USER")
-                // All other requests require authentication
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/dashboard", true)
-                .permitAll()
+                // Public pages - allow all access
+                .requestMatchers("/", "/login", "/signup", "/signup-success", "/admin/login", 
+                                "/css/**", "/js/**", "/images/**").permitAll()
+                // All other requests are allowed (session-based custom auth implemented in controllers)
+                .anyRequest().permitAll()
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
@@ -49,8 +41,7 @@ public class SecurityConfig {
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(false)
             )
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")) // For development only
-            .headers(headers -> headers.frameOptions().sameOrigin()); // For H2 console if needed
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")); // For development only
 
         return http.build();
     }

@@ -125,8 +125,14 @@ http://localhost:8080
 ## Default Credentials
 
 ### Admin Login
-- **Admin ID**: admin
-- **Password**: admin123
+- **Admin ID**: admin (or set via `ADMIN_ID` environment variable)
+- **Password**: admin123 (or set via `ADMIN_PASSWORD` environment variable)
+
+For production, set custom admin credentials using environment variables:
+```bash
+export ADMIN_ID=your_admin_id
+export ADMIN_PASSWORD=your_secure_password
+```
 
 ### User Login
 Users need to register first to create an account. After registration, they will receive an account number and PIN.

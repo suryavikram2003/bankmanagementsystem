@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change PIN - Bank Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}" style="float: right;">Logout</a>
+        </div>
+
+        <h1>Change PIN</h1>
+
+        <div th:if="${error}" class="alert alert-error">
+            <p th:text="${error}"></p>
+        </div>
+
+        <form th:action="@{/pin}" th:object="${pinChangeRequest}" method="post">
+            <div class="form-group">
+                <label for="currentPin">Current PIN:</label>
+                <input type="password" id="currentPin" th:field="*{currentPin}" 
+                       placeholder="Enter current PIN" required>
+            </div>
+
+            <div class="form-group">
+                <label for="newPin">New PIN:</label>
+                <input type="password" id="newPin" th:field="*{newPin}" 
+                       placeholder="Enter new PIN" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPin">Confirm New PIN:</label>
+                <input type="password" id="confirmPin" th:field="*{confirmPin}" 
+                       placeholder="Re-enter new PIN" required>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Change PIN</button>
+                <a th:href="@{/dashboard}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

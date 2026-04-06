@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Success</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Successful!</h1>
+        
+        <div class="alert alert-success">
+            <h2>Your account has been created successfully!</h2>
+            <p><strong>Please save these credentials:</strong></p>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Account Number:</strong> <span th:text="${accountNumber}" style="font-size: 20px; color: #667eea;"></span></p>
+                <p><strong>PIN (Keep Confidential):</strong> <span th:text="${pin}" style="font-size: 20px; color: #667eea;"></span></p>
+            </div>
+            <p style="color: #dc3545;"><strong>Important:</strong> Please keep these credentials safe. You won't be able to see your PIN again!</p>
+        </div>
+
+        <div class="text-center mt-20">
+            <a th:href="@{/login}" class="btn btn-primary">Go to Login</a>
+        </div>
+    </div>
+</body>
+</html>

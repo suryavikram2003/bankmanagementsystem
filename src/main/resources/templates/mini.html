@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Statement - Bank Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}" style="float: right;">Logout</a>
+        </div>
+
+        <h1>Mini Statement</h1>
+
+        <div class="card">
+            <p><strong>Account Number:</strong> <span th:text="${accountNumber}"></span></p>
+            <p><strong>Current Balance:</strong> ₹<span th:text="${#numbers.formatDecimal(balance, 1, 2)}"></span></p>
+        </div>
+
+        <h2>Recent Transactions (Last 10)</h2>
+        
+        <div th:if="${transactions.isEmpty()}" class="alert alert-error">
+            <p>No transactions found.</p>
+        </div>
+
+        <table th:unless="${transactions.isEmpty()}">
+            <thead>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transaction : ${transactions}">
+                    <td th:text="${#temporals.format(transaction.transactionDate, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${transaction.transactionType}"></td>
+                    <td>
+                        <span th:if="${transaction.transactionType == 'Deposit'}" style="color: green;">
+                            + ₹<span th:text="${#numbers.formatDecimal(transaction.amount, 1, 2)}"></span>
+                        </span>
+                        <span th:if="${transaction.transactionType == 'Withdrawal'}" style="color: red;">
+                            - ₹<span th:text="${#numbers.formatDecimal(transaction.amount, 1, 2)}"></span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center mt-20">
+            <a th:href="@{/dashboard}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
